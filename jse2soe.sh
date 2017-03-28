@@ -2,7 +2,7 @@
 # This script will update a jse or soe site for developmemt
 sitename=$1
 
-f [! -z ${sitename+x} ]; then
+if [ -z ${sitename+x} ]; then
   echo "usage: jse2soe.sh <sitename>";
   exit;
 fi
@@ -12,10 +12,10 @@ location='all'
 # On local:
 siteroot=${docroot}/${sitename}
 # On sites:
-#siteroot=${docroot}/${sitename}/public_html
+#siteroot=${docroot}/ds_${sitename}/public_html
 
-stanfordroot=${docroot}/${sitename}/sites/${location}/modules/stanford
-contribroot=${docroot}/${sitename}/sites/${location}/modules/contrib
+stanfordroot=${siteroot}/sites/${location}/modules/stanford
+contribroot=${siteroot}/sites/${location}/modules/contrib
 
 drush arb
 
