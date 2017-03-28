@@ -24,7 +24,7 @@ fi
 stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
 
-drush arb
+# drush arb
 
 # Install dependencies
 cd ${contribroot}
