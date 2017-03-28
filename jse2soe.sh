@@ -10,7 +10,7 @@ fi
 hosting='local'
 # hosting='sites'
 
-if [ $hosting == 'sites']
+if [ $hosting == 'sites']; then
   docroot='/var/www'
   location='default'
   siteroot=${docroot}/ds_${sitename}/public_html
