@@ -83,6 +83,8 @@ drush en stanford_soe_helper_landing_page -y
 drush cc all
 drush en stanford_soe_helper_page -y
 drush cc all
+drush en stanford_soe_helper_event -y
+drush cc all
 drush en nobots -y
 drush cc all
 
@@ -95,10 +97,36 @@ echo
 echo *Stanford Page*
 echo - Navigate to Stanford Page - admin/structure/types/manage/stanford-page/display/
 echo - Enable Full Content
-echo - Select full content
+echo - Navigate full content
 echo - Select a layout: one column
 echo - Select Block regions
 echo - Enter region name - Stanford Page Title
-echo - Move the title int0 the new region
+echo - Move the title field into the new region
 echo - Save
 echo
+echo *Event*
+echo - Navigate to Stanford Event - admin/structure/types/manage/stanford-event/display/
+echo - Enable Full Content
+echo - Navigate to  full content
+echo - Select a layout: one column
+echo - Select Block regions
+echo - Enter region name - Stanford Event Title
+echo - Move the title field into the new region
+echo - Save
+echo
+echo
+echo *Landing Page*
+echo - Navigate to Stanford Landing Page - admin/structure/types/manage/stanford-landing-page/display/
+echo - Enable Full Content
+echo - Navigate to  full content
+echo - Select a layout: one column
+echo - Select Block regions
+echo - Enter region name - Stanford Landing Page Title
+echo - Move the title field into the new region
+echo - Adjust other fields as necessary
+echo - Save
+echo
+echo Disable block title - <none>
+echo - event page
+echo -  Stanford page
+echo - landing page
