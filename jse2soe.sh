@@ -2,29 +2,40 @@
 # This script will update a jse or soe site for developmemt
 sitename=$1
 
+# hosting can be either local or sites
+hosting=$2
+
+
 if [ -z ${sitename+x} ]; then
-  echo "usage: jse2soe.sh <sitename>";
-  exit;
+  echo "usage: jse2soe.sh <sitename> <local|sites>";
+  exit
 fi
 
-hosting='local'
-# hosting='sites'
+if [ -z ${hosting+x} ]; then
+  echo "usage: jse2soe.sh <sitename>  <local|sites>";
+  exit
+fi
 
 if [ $hosting == 'sites' ]; then
   docroot='/var/www'
   location='default'
   siteroot=${docroot}/ds_${sitename}/public_html
 else
-  docroot='/Users/cjwest/Documents/htdocs'
-  location='all'
-  siteroot=${docroot}/${sitename}
+  if [ $hosting == 'local' ]; then
+    docroot='/Users/cjwest/Documents/htdocs'
+    location='all'
+    siteroot=${docroot}/${sitename}
+  else
+    echo "usage: jse2soe.sh <sitename> <local|sites>";
+    exit
+  fi
 fi
 
 
 stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
 
-# drush arb
+drush arb
 
 # Install dependencies
 cd ${contribroot}
@@ -95,6 +106,9 @@ drush cc all
 drush en nobots -y
 drush cc all
 
+echo Time to configure!
+echo ******************
+echo
 echo Disable Solr indexing
 echo - admin/config/search/search_api/index/solr_nodes_now/edit
 echo - Check the Read Only box
