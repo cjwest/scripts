@@ -34,9 +34,9 @@ fi
 #if [ ! -d "chosen" ]; then
 #drush dl chosen --destination=sites/${location}/modules/contrib
 #fi
-#if [ ! -d "blockreference" ]; then
-#  drush dl blockreference --destination=sites/${location}/modules/contrib
-#fi
+if [ ! -d "blockreference" ]; then
+  drush dl blockreference --destination=sites/${location}/modules/contrib
+fi
 if [ ! -d "paragraphs" ]; then
   drush dl paragraphs --destination=sites/${location}/modules/contrib
 fi
