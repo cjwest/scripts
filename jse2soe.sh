@@ -6,13 +6,20 @@ if [ -z ${sitename+x} ]; then
   echo "usage: jse2soe.sh <sitename>";
   exit;
 fi
-docroot='/Users/cjwest/Documents/htdocs'
-# Set location to 'all' or 'default'
-location='all'
-# On local:
-siteroot=${docroot}/${sitename}
-# On sites:
-#siteroot=${docroot}/ds_${sitename}/public_html
+
+hosting='local'
+# hosting='sites'
+
+if [ $hosting == 'sites']
+  docroot='/var/www'
+  location='default'
+  siteroot=${docroot}/ds_${sitename}/public_html
+else
+  docroot='/Users/cjwest/Documents/htdocs'
+  location='all'
+  siteroot=${docroot}/${sitename}
+fi
+
 
 stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
