@@ -147,7 +147,7 @@ echo - Move the title field into the new region
 echo - Adjust other fields as necessary
 echo - Save
 echo
-echo Disable block title - <none>
+echo 'Disable block title - <none>'
 echo - event page
 echo -  Stanford page
 echo - landing page
