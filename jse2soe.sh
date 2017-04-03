@@ -121,7 +121,13 @@ echo - Enable Full Content
 echo - Navigate full content
 echo - Select a layout: one column
 echo - Select Block regions
+echo - Enter region name - Stanford Page Featured Image
+echo - Save
+echo - Move the Featured image field into the new region & Save
+echo - For Featured Image, verify: Field collection items & view mode
+echo - Select Block regions
 echo - Enter region name - Stanford Page Title
+echo - save
 echo - Move the title field into the new region
 echo - Save
 echo
