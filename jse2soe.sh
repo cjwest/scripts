@@ -5,6 +5,15 @@ sitename=$1
 # hosting can be either local or sites
 hosting=$2
 
+# put in options
+#while getopts 's:n:' opt; do
+#    case $opt in
+#        s)  service="$OPTARG" ;;
+#        n)  node="$OPTARG"    ;;
+#        *)  exit 1            ;;
+#    esac
+#done
+
 
 if [ -z "$sitename" ]; then
   echo "usage: jse2soe.sh <sitename> <local|sites>";
@@ -37,9 +46,7 @@ fi
 stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
 
-echo "stanfordroot = " ${stanfordroot}
-echo "contribroot = " ${contribroot}
-
+echo "Backing up "${sitename}
 drush arb
 
 # Install dependencies
@@ -103,10 +110,12 @@ cd ${stanfordroot}
 
 drush rr
 
+drush en nobots -y
+drush cc all
 drush en ds_ui -y
 drush en context_list_active -y
 drush cc all
-drush en stanford_magazine -y
+drush en stanford_magazine stanford_magazine_layouts -y
 drush cc all
 drush en stanford_soe_helper_landing_page -y
 drush cc all
@@ -114,7 +123,7 @@ drush en stanford_soe_helper_page -y
 drush cc all
 drush en stanford_soe_helper_event -y
 drush cc all
-drush en nobots -y
+drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page stanford_magazine -y --force
 drush cc all
 
 # drush role-add-perm 'user-role' 'permission'
@@ -128,70 +137,74 @@ drush role-add-perm 'site owner' 'delete own stanford_magazine_article content'
 drush role-add-perm 'site owner' 'edit any stanford_magazine_article content'
 drush role-add-perm 'site owner' 'delete any stanford_magazine_article content'
 
-echo Time to configure!
-echo ******************
+echo "Time to configure!"
+echo "******************"
 echo
-echo Disable Solr indexing
-echo - admin/config/search/search_api/index/solr_nodes_now/edit
-echo - Check the Read Only box
+echo "If this is a developmemt site, disable Solr indexing"
+echo " - admin/config/search/search_api/index/solr_nodes_now/edit"
+echo " - Check the Read Only box"
 echo
-echo Configure Display Suite
-echo - Navigate to admin/structure/ds/list/extras
+echo "Configure Display Suite"
+echo " - Navigate to admin/structure/ds/list/extras"
 echo " - Select region to block"
-echo " - Select \'Page title options\'"
+echo " - Select 'Page title options'"
 echo
-echo *Stanford Page*
-echo - Navigate to Stanford Page:
+echo "*Stanford Page*"
+echo " - Navigate to Stanford Page:"
 echo " - admin/structure/types/manage/stanford-page/display/"
-echo - Enable Full Content
-echo - Navigate to full content
-echo - Select a layout: one column
-echo - Select Block regions
-echo - Enter region name - Stanford Page Featured Image
-echo "- Select \'Custom page title\'"
-echo "- For Page title, select \'Hide\'"
-echo "- Save"
-echo "- Move the Featured image field into the new region \& Save"
-echo "- For Featured Image, verify: Field collection items \& view mode \'Banner (850x400)\'"
-echo - Select Block regions
-echo - Enter region name - Stanford Page Title
-echo - "Save"
-echo - Move the title field into the new region
-echo - "Save"
+echo " - Enable Full Content"
+echo " - Navigate to full content"
+echo " - Select a layout: one column"
+echo " - Configure Block regions"
+echo "   - Enter region names"
+echo "     - Stanford Page Featured Image"
+echo "     - Stanford Page Title"
+echo " - Hide Title"
+echo "   - Select 'Custom page title'"
+echo "   - For Page title, select 'Hide'"
+echo "   - Save"
+echo " - Move the title field into the new Title region"
+echo " - Move the Featured image field into the new Image region "
+echo " -  Configure featured Image:"
+echo "   - verify: Field collection items"
+echo "   - view mode 'TBD - Full width banner'"
+echo "   - Remove link text: 'edit', 'delete','add'"
+echo " - Save"
 echo
-echo *Event*
-echo - Navigate to Stanford Event:
+echo " *Event*"
+echo " - Navigate to Stanford Event:"
 echo " - admin/structure/types/manage/stanford-event/display/"
-echo - Enable Full Content
-echo - Navigate to  full content
-echo - Select a layout: one column
-echo - Select Block regions
-echo - Enter region name - Stanford Event Title
-echo - Move the title field into the new region
-echo "- Select \'Custom page title\'"
-echo "- For Page title, select \'Hide\'"
-echo - "Save"
+echo " - Enable Full Content"
+echo " - Navigate to  full content"
+echo " - Select a layout: one column"
+echo " - Select Block regions"
+echo " - Enter region name - Stanford Event Title"
+echo " - Move the title field into the new region"
+echo " - Select 'Custom page title'"
+echo " - For Page title, select 'Hide'"
+echo " - Save"
 echo
 echo
-echo *Landing Page*
-echo - Navigate to Stanford Landing Page -
+echo "*Landing Page*"
+echo " - Navigate to Stanford Landing Page"
 echo " - admin/structure/types/manage/stanford-landing-page/display/"
-echo - Enable Full Content
-echo - Navigate to  full content
-echo - Select a layout: one column
-echo - Select Block regions
-echo - Enter region name - Stanford Landing Page Title
-echo - Move the title field into the new region
-echo - Adjust other fields as necessary
-echo "- Select \'Custom page title\'"
-echo "- For Page title, select \'Hide\'"
-echo - "Save"
+echo " - Enable Full Content"
+echo " - Navigate to  full content"
+echo " - Select a layout: one column"
+echo " - Select Block regions"
+echo " - Enter region name - Stanford Landing Page Title"
+echo " - Move the title field into the new region"
+echo " - Adjust other fields as necessary"
+echo " - Select 'Custom page title'"
+echo " - For Page title, select 'Hide'"
+echo " - Save"
 echo
-echo 'Disable block title - <none>'
-echo - event page
-echo - Stanford page
-echo - landing page
+echo '*Disable block titles*'
+echo " Navigate to an instance of each of these content types and set block title to <none>"
+echo " - event"
+echo " - Stanford page"
+echo " - landing page"
 echo
 echo "*Permissions*"
 echo "- Add permissions for site owner and editor for:"
-echo  " - Taxonomies"
+echo " - Taxonomies"
