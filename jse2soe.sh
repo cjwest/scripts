@@ -64,6 +64,16 @@ if [ ! -d "paragraphs" ]; then
   drush dl paragraphs --destination=sites/${location}/modules/contrib
 fi
 
+
+cd ${stanfordroot}
+if [ ! -d "${stanfordroot}/stanford_image_styles" ]; then
+  git clone https://github.com/SU-SWS/stanford_image_styles.git
+fi
+cd ${stanfordroot}/stanford_image_styles
+git fetch
+git checkout Redesign
+git pull origin Redesign
+
 cd ${stanfordroot}
 if [ ! -d "stanford_magazine" ]; then
   git clone https://github.com/SU-SWS/stanford_magazine.git
@@ -130,6 +140,7 @@ drush cc all
 drush role-add-perm 'editor' 'create stanford_magazine_article content'
 drush role-add-perm 'editor' 'edit own stanford_magazine_article content'
 drush role-add-perm 'editor' 'delete own stanford_magazine_article content'
+drush role-add-perm 'editor' 'edit any stanford_magazine_article content'
 
 drush role-add-perm 'site owner' 'create stanford_magazine_article content'
 drush role-add-perm 'site owner' 'edit own stanford_magazine_article content'
