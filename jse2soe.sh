@@ -27,14 +27,15 @@ fi
 
 if [ $hosting == 'sites' ]; then
   docroot='/var/www'
-  location='default'
   siteroot=${docroot}/ds_${sitename}/public_html
 else
   if [ $hosting == 'local' ]; then
     docroot='/Users/cjwest/Documents/htdocs'
-    location='all'
     siteroot=${docroot}/${sitename}
 
+    echo "Local configuration"
+    cd ${siteroot}
+    drush vset stanford_sites_allow_features_generate TRUE
     drush dis webauth webauth_extras -y
   else
     echo "usage: jse2soe.sh <sitename> <local|sites>";
@@ -43,6 +44,7 @@ else
 fi
 
 
+location='default'
 stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
 
