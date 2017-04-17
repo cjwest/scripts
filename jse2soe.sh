@@ -65,6 +65,9 @@ fi
 if [ ! -d "paragraphs" ]; then
   drush dl paragraphs --destination=sites/${location}/modules/contrib
 fi
+if [ ! -d "hires_images" ]; then
+  drush dl hires_images --destination=sites/${location}/modules/contrib
+fi
 
 
 cd ${stanfordroot}
@@ -75,6 +78,15 @@ cd ${stanfordroot}/stanford_image_styles
 git fetch
 git checkout Redesign
 git pull origin Redesign
+
+cd ${stanfordroot}
+if [ ! -d "${stanfordroot}/stanford_image" ]; then
+  git clone https://github.com/SU-SWS/stanford_image.git
+fi
+cd ${stanfordroot}/stanford_image
+git fetch
+git checkout redesign
+git pull origin redesign
 
 cd ${stanfordroot}
 if [ ! -d "stanford_magazine" ]; then
@@ -122,12 +134,15 @@ cd ${stanfordroot}
 
 drush rr
 
+
 drush en nobots -y
 drush cc all
 drush en ds_ui -y
 drush en context_list_active -y
 drush cc all
-drush en stanford_magazine stanford_magazine_layouts -y
+drush en stanford_magazine -y
+drush cc all
+drush en stanford_soe_helper_magazine -y
 drush cc all
 drush en stanford_soe_helper_landing_page -y
 drush cc all
@@ -135,7 +150,7 @@ drush en stanford_soe_helper_page -y
 drush cc all
 drush en stanford_soe_helper_event -y
 drush cc all
-drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page stanford_magazine -y --force
+drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page stanford_magazine stanford_soe_helper_magazine stanford_image stanford_image_styles -y --force
 drush cc all
 
 # drush role-add-perm 'user-role' 'permission'
@@ -178,10 +193,13 @@ echo "   - For Page title, select 'Hide'"
 echo "   - Save"
 echo " - Move the title field into the new Title region"
 echo " - Move the Featured image field into the new Image region "
-echo " -  Configure featured Image:"
+echo " - Configure featured Image:"
 echo "   - verify: Field collection items"
 echo "   - view mode 'TBD - Full width banner'"
 echo "   - Remove link text: 'edit', 'delete','add'"
+echo " - Configure the Accent Color"
+echo "   - Move accent color into the bottom banner region"
+echo "   - Edit the accent color field and set a default color"
 echo " - Save"
 echo
 echo " *Event*"
