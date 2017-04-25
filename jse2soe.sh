@@ -53,22 +53,9 @@ drush arb
 
 # Install dependencies
 cd ${contribroot}
-if [ ! -d "video_embed_field" ]; then
-  drush dl video_embed_field --destination=sites/${location}/modules/contrib
+if [ ! -d "regions" ]; then
+  drush dl regions --destination=sites/${location}/modules/contrib
 fi
-#if [ ! -d "chosen" ]; then
-#drush dl chosen --destination=sites/${location}/modules/contrib
-#fi
-if [ ! -d "blockreference" ]; then
-  drush dl blockreference --destination=sites/${location}/modules/contrib
-fi
-if [ ! -d "paragraphs" ]; then
-  drush dl paragraphs --destination=sites/${location}/modules/contrib
-fi
-if [ ! -d "hires_images" ]; then
-  drush dl hires_images --destination=sites/${location}/modules/contrib
-fi
-
 
 cd ${stanfordroot}
 if [ ! -d "${stanfordroot}/stanford_image_styles" ]; then
