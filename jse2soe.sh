@@ -132,6 +132,15 @@ git checkout 7.x-1.x
 git pull origin 7.x-1.x
 cd ${stanfordroot}
 
+if [ ! -d "${stanfordroot}/stanford_soe_regions" ]; then
+  git clone https://github.com/SU-SWS/stanford_soe_regions.git
+fi
+cd ${stanfordroot}/stanford_soe_regions
+git fetch
+git checkout 7.x-1.x
+git pull origin 7.x-1.x
+cd ${stanfordroot}
+
 drush rr
 
 
@@ -228,6 +237,16 @@ echo " - Move the title field into the new region"
 echo " - Adjust other fields as necessary"
 echo " - Select 'Custom page title'"
 echo " - For Page title, select 'Hide'"
+echo " - Save"
+echo
+echo "*Stanford Magazine Issue"
+echo " - Enable Full Content"
+echo " - Navigate to  full content"
+echo " - Select a layout: one column"
+echo " - For Page title, select 'Hide'"
+echo " - Configure the Accent Color"
+echo "   - Move accent color above the article fields"
+echo "   - Edit the accent color field and set a default color"
 echo " - Save"
 echo
 echo '*Disable block titles*'
