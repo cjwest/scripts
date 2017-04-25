@@ -149,6 +149,8 @@ drush cc all
 drush en ds_ui -y
 drush en context_list_active -y
 drush cc all
+drush en stanford_soe_regions -y
+drush cc all
 drush en stanford_magazine -y
 drush cc all
 drush en stanford_soe_helper_magazine -y
@@ -173,6 +175,17 @@ drush role-add-perm 'site owner' 'edit own stanford_magazine_article content'
 drush role-add-perm 'site owner' 'delete own stanford_magazine_article content'
 drush role-add-perm 'site owner' 'edit any stanford_magazine_article content'
 drush role-add-perm 'site owner' 'delete any stanford_magazine_article content'
+
+drush role-add-perm 'editor' 'create stanford_magazine_issue content'
+drush role-add-perm 'editor' 'edit own stanford_magazine_issue content'
+drush role-add-perm 'editor' 'delete own stanford_magazine_issue content'
+drush role-add-perm 'editor' 'edit any stanford_magazine_issue content'
+
+drush role-add-perm 'site owner' 'create stanford_magazine_issue content'
+drush role-add-perm 'site owner' 'edit own stanford_magazine_issue content'
+drush role-add-perm 'site owner' 'delete own stanford_magazine_issue content'
+drush role-add-perm 'site owner' 'edit any stanford_magazine_issue content'
+drush role-add-perm 'site owner' 'delete any stanford_magazine_issue content'
 
 echo "Time to configure!"
 echo "******************"
