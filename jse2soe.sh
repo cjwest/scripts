@@ -128,6 +128,15 @@ git checkout 7.x-1.x
 git pull origin 7.x-1.x
 cd ${stanfordroot}
 
+if [ ! -d "${stanfordroot}/stanford_field_formatters" ]; then
+  git clone https://github.com/SU-SWS/stanford_field_formatters.git
+fi
+cd ${stanfordroot}/stanford_field_formatters
+git fetch
+git checkout 7.x-1.x
+git pull origin 7.x-1.x
+cd ${stanfordroot}
+
 drush rr
 
 
