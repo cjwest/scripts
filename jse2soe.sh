@@ -149,6 +149,8 @@ drush en stanford_soe_regions -y
 drush cc all
 drush en stanford_magazine -y
 drush cc all
+drush en stanford_magazine_issue -y
+drush cc all
 drush en stanford_soe_helper_magazine -y
 drush cc all
 drush en stanford_soe_helper_landing_page -y
@@ -157,7 +159,10 @@ drush en stanford_soe_helper_page -y
 drush cc all
 drush en stanford_soe_helper_event -y
 drush cc all
-drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page stanford_magazine stanford_soe_helper_magazine stanford_image stanford_image_styles -y --force
+drush fr stanford_image_styles stanford_image -y --force
+drush fr stanford_magazine stanford_magazine_issue -y --force
+drush fr stanford_soe_helper_magazine  -y --force
+drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page -y --force
 drush cc all
 
 # drush role-add-perm 'user-role' 'permission'
@@ -190,10 +195,15 @@ echo "If this is a developmemt site, disable Solr indexing"
 echo " - admin/config/search/search_api/index/solr_nodes_now/edit"
 echo " - Check the Read Only box"
 echo
-echo "Configure Display Suite"
+echo "If this is a JSE site: Configure Display Suite"
 echo " - Navigate to admin/structure/ds/list/extras"
 echo " - Select region to block"
 echo " - Select 'Page title options'"
+echo
+echo "*Configure Taxonomies"
+echo "admin/structure/taxonomy_manager/voc/soe_accent_color - pink orange turquoise"
+echo "admin/structure/taxonomy_manager/voc/stanford_magazine_topics"
+echo ""
 echo
 echo "*Stanford Page*"
 echo " - Navigate to Stanford Page:"
@@ -213,7 +223,7 @@ echo " - Move the title field into the new Title region"
 echo " - Move the Featured image field into the new Image region "
 echo " - Configure featured Image:"
 echo "   - verify: Field collection items"
-echo "   - view mode 'TBD - Full width banner'"
+echo "   - view mode 'stanford_fw_banner_tall_caption'"
 echo "   - Remove link text: 'edit', 'delete','add'"
 echo " - Configure the Accent Color"
 echo "   - Move accent color into the bottom banner region"
