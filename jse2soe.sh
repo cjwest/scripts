@@ -47,11 +47,26 @@ fi
 location='default'
 stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
+libraryroot=${siteroot}/sites/${location}/libraries
 
 echo "Backing up "${sitename}
 drush arb
 
 # Install dependencies
+
+cd ${libraryroot}
+if [ ! -d "chosen" ]; then
+  git clone https://github.com/harvesthq/chosen.git
+fi
+cd ${libraryroot}/chosen
+git fetch
+git checkout v1.7.0
+
+cd ${contribroot}
+if [ ! -d "chosen" ]; then
+  drush dl chosen --destination=sites/${location}/modules/contrib
+fi
+
 cd ${contribroot}
 if [ ! -d "regions" ]; then
   drush dl regions --destination=sites/${location}/modules/contrib
@@ -81,6 +96,11 @@ if [ ! -d "stanford_magazine" ]; then
 fi
 cd ${stanfordroot}/stanford_magazine
 git checkout 7.x-1.x
+
+cd ${stanfordroot}/stanford_jumpstart_engineering
+git fetch
+git checkout redesign
+git pull origin redesign
 
 cd ${stanfordroot}
 if [ ! -d "stanford_soe_helper" ]; then
@@ -120,7 +140,7 @@ git pull origin 7.x-1.x
 cd ${stanfordroot}
 
 if [ ! -d "${stanfordroot}/stanford_soe_regions" ]; then
-  git clone https://github.com/SU-SWS/stanford_soe_regions.git
+  git clone https://github.com/SU-SOE/stanford_soe_regions.git
 fi
 cd ${stanfordroot}/stanford_soe_regions
 git fetch
@@ -140,6 +160,8 @@ cd ${stanfordroot}
 drush rr
 
 
+drush en chosen -y
+drush cc all
 drush en nobots -y
 drush cc all
 drush en ds_ui -y
@@ -201,9 +223,10 @@ echo " - Select region to block"
 echo " - Select 'Page title options'"
 echo
 echo "*Configure Taxonomies"
-echo "admin/structure/taxonomy_manager/voc/soe_accent_color - pink orange turquoise"
-echo "admin/structure/taxonomy_manager/voc/stanford_magazine_topics"
-echo ""
+echo " - admin/structure/taxonomy_manager/voc/soe_accent_color - pink orange turquoise"
+echo " - admin/structure/taxonomy_manager/voc/stanford_magazine_topics"
+echo " - admin/structure/taxonomy_manager/voc/stanford_mag_issue_layout - featured left featured right featured center"
+echo " - admin/structure/taxonomy_manager/voc/stanford_mag_issue_series"
 echo
 echo "*Stanford Page*"
 echo " - Navigate to Stanford Page:"
@@ -258,15 +281,21 @@ echo " - Select 'Custom page title'"
 echo " - For Page title, select 'Hide'"
 echo " - Save"
 echo
-echo "*Stanford Magazine Issue"
-echo " - Enable Full Content"
-echo " - Navigate to  full content"
-echo " - Select a layout: one column"
-echo " - For Page title, select 'Hide'"
+echo "*Stanford Magazine Article"
 echo " - Configure the Accent Color"
-echo "   - Move accent color above the article fields"
+echo "   - Navigate to admin/structure/types/manage/stanford_magazine_article/fields/field_s_mag_article_accent_color"
 echo "   - Edit the accent color field and set a default color"
-echo " - Save"
+echo "   - Move accent color above the department field"
+echo
+echo "*Stanford Magazine Issue"
+echo " - Configure the Accent Color"
+echo "   - Navigate to admin/structure/types/manage/stanford-magazine-issue/fields/field_s_mag_issue_accent_color"
+echo "   - set a default color"
+echo "   - Move accent color above the article fields"
+echo " - Configure layout terms"
+echo "   - Navigate to admin/structure/types/manage/stanford_magazine_issue/fields/field_s_mag_issue_layout"
+echo "   - set a default layout"
+echo
 echo
 echo '*Disable block titles*'
 echo " Navigate to an instance of each of these content types and set block title to <none>"
@@ -275,5 +304,13 @@ echo " - Stanford page"
 echo " - landing page"
 echo
 echo "*Permissions*"
-echo "- Add permissions for site owner and editor for:"
-echo " - Taxonomies"
+echo "admin/people/permissions"
+echo "- Add permissions for site owner for:"
+echo " - Taxonomies: "
+echo "    - Magazine Issue Layout, "
+echo "    - Magazine Series, "
+echo "    - Magazine Topics, "
+echo "    - Magazine Eyebrow, "
+echo "    - Department"
+echo ""
+echo " - Default image FT"
