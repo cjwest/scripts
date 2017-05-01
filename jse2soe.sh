@@ -61,6 +61,8 @@ fi
 cd ${libraryroot}/chosen
 git fetch
 git checkout v1.7.0
+wget https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip
+unzip chosen_v1.1.0.zip
 
 cd ${contribroot}
 if [ ! -d "chosen" ]; then
