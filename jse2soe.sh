@@ -53,16 +53,13 @@ echo "Backing up "${sitename}
 drush arb
 
 # Install dependencies
-
 cd ${libraryroot}
 if [ ! -d "chosen" ]; then
-  git clone https://github.com/harvesthq/chosen.git
+  mkdir chosen
+  cd chosen
+  wget https://github.com/harvesthq/chosen/releases/download/v1.7.0/chosen_v1.7.0.zip
+  unzip chosen_v1.7.0.zip
 fi
-cd ${libraryroot}/chosen
-git fetch
-git checkout v1.7.0
-wget https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip
-unzip chosen_v1.1.0.zip
 
 cd ${contribroot}
 if [ ! -d "chosen" ]; then
