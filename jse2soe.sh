@@ -59,6 +59,9 @@ if [ ! -d "chosen" ]; then
   cd chosen
   wget https://github.com/harvesthq/chosen/releases/download/v1.7.0/chosen_v1.7.0.zip
   unzip chosen_v1.7.0.zip
+  rm -f chosen_v1.7.0.zip
+  cd ${libraryroot}
+  chmod 755 chosen/*
 fi
 
 cd ${contribroot}
