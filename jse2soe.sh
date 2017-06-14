@@ -74,6 +74,12 @@ if [ ! -d "regions" ]; then
   drush dl regions --destination=sites/${location}/modules/contrib
 fi
 
+cd ${contribroot}
+if [ ! -d "views_load_more" ]; then
+  drush dl regions --destination=sites/${location}/modules/contrib
+fi
+
+
 cd ${stanfordroot}
 if [ ! -d "${stanfordroot}/stanford_image_styles" ]; then
   git clone https://github.com/SU-SWS/stanford_image_styles.git
@@ -93,6 +99,13 @@ git checkout redesign
 git pull origin redesign
 
 cd ${stanfordroot}
+if [ ! -d "stanford_help" ]; then
+  git clone https://github.com/SU-SWS/stanford_help.git
+fi
+cd ${stanfordroot}/stanford_help
+git checkout 7.x-1.1
+cd ${stanfordroot}
+
 if [ ! -d "stanford_magazine" ]; then
   git clone https://github.com/SU-SWS/stanford_magazine.git
 fi
@@ -159,17 +172,27 @@ git checkout 7.x-1.x
 git pull origin 7.x-1.x
 cd ${stanfordroot}
 
+if [ ! -d "${stanfordroot}/stanford_bean_types" ]; then
+  git clone https://github.com/SU-SWS/stanford_bean_types.git
+fi
+cd ${stanfordroot}/stanford_bean_types
+git fetch
+git checkout 7.x-3.x
+git pull origin 7.x-3.x
+cd ${stanfordroot}
+
+drush updb -y
 drush rr
 
 
-drush en chosen -y
+drush en chosen views_load_more -y
 drush cc all
 drush en nobots -y
 drush cc all
 drush en ds_ui -y
 drush en context_list_active -y
 drush cc all
-drush en stanford_soe_regions -y
+drush en stanford_soe_regions stanford_help -y
 drush cc all
 drush en stanford_magazine -y
 drush cc all
@@ -230,6 +253,9 @@ echo " - admin/structure/taxonomy_manager/voc/stanford_magazine_topics"
 echo " - admin/structure/taxonomy_manager/voc/stanford_mag_issue_layout - featured left featured right featured center"
 echo " - admin/structure/taxonomy_manager/voc/stanford_mag_issue_series"
 echo
+echo "*Stanford Help"
+echo " - Create help page at site-help"
+echo
 echo "*Stanford Page*"
 echo " - Navigate to Stanford Page:"
 echo " - admin/structure/types/manage/stanford-page/display/"
@@ -284,6 +310,18 @@ echo " - For Page title, select 'Hide'"
 echo " - Save"
 echo
 echo "*Stanford Magazine Article"
+echo " - Configure layout"
+echo "   - Navigate to Stanford Landing Page"
+echo "   - admin/structure/types/manage/stanford-landing-page/display/"
+echo "   - Enable Full Content"
+echo "   - Navigate to  full content"
+echo "   - Move Date and Byline Wrapper above publishing date and byline"
+echo " - Configure the Departments"
+echo "   - Select a layout: one column"
+echo "   - Select Block regions"
+echo "   - Enter region name - Related Departments"
+echo "   - Move 'Department' below Related Departments"
+echo "   - In the 'Format' dropdown, select 'Separated'"
 echo " - Configure the Accent Color"
 echo "   - Navigate to admin/structure/types/manage/stanford_magazine_article/fields/field_s_mag_article_accent_color"
 echo "   - Edit the accent color field and set a default color"
@@ -316,3 +354,6 @@ echo "    - Magazine Eyebrow, "
 echo "    - Department"
 echo ""
 echo " - Default image FT"
+echo ""
+echo "*Stanford Bean Types Call to Action"
+echo "Replace color taxonomy with the SoE Accent Color"
