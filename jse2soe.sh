@@ -65,6 +65,11 @@ if [ ! -d "chosen" ]; then
 fi
 
 cd ${contribroot}
+if [ ! -d "field_group_link" ]; then
+  drush dl field_group_link --destination=sites/${location}/modules/contrib
+fi
+
+cd ${contribroot}
 if [ ! -d "chosen" ]; then
   drush dl chosen --destination=sites/${location}/modules/contrib
 fi
@@ -177,15 +182,15 @@ if [ ! -d "${stanfordroot}/stanford_bean_types" ]; then
 fi
 cd ${stanfordroot}/stanford_bean_types
 git fetch
-git checkout 7.x-3.x
-git pull origin 7.x-3.x
+git checkout redesign-cjw
+git pull origin redesign-cjw
 cd ${stanfordroot}
 
 drush updb -y
 drush rr
 
 
-drush en chosen views_load_more -y
+drush en chosen views_load_more field_group_link -y
 drush cc all
 drush en nobots -y
 drush cc all
@@ -194,7 +199,7 @@ drush en context_list_active -y
 drush cc all
 drush en stanford_soe_regions stanford_help -y
 drush cc all
-drush en stanford_magazine -y
+drush en stanford_magazine stanford_magazine_issue_views -y
 drush cc all
 drush en stanford_magazine_issue -y
 drush cc all
@@ -206,10 +211,13 @@ drush en stanford_soe_helper_page -y
 drush cc all
 drush en stanford_soe_helper_event -y
 drush cc all
+drush en stanford_bean_types_call_to_action stanford_bean_types_call_to_action_administration -y
+drush cc all
 drush fr stanford_image_styles stanford_image -y --force
 drush fr stanford_magazine stanford_magazine_issue -y --force
 drush fr stanford_soe_helper_magazine  -y --force
 drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page -y --force
+drush fr stanford_bean_types_call_to_action stanford_bean_types_call_to_action_administration -y --force
 drush cc all
 
 # drush role-add-perm 'user-role' 'permission'
@@ -336,6 +344,13 @@ echo " - Configure layout terms"
 echo "   - Navigate to admin/structure/types/manage/stanford_magazine_issue/fields/field_s_mag_issue_layout"
 echo "   - set a default layout"
 echo
+echo "*Stanford Call to Action blocks"
+echo " - Configure layout"
+echo "   - Navigate to Stanford Call to Action blocks"
+echo "   - admin/structure/block-types/manage/stanford-call-to-action/display"
+echo "   - Enable Full Content"
+echo "   - Navigate to full content"
+echo "   - Move fields and field groups (Link group (Image style (Image, Icon), Title style(title)))"
 echo
 echo '*Disable block titles*'
 echo " Navigate to an instance of each of these content types and set block title to <none>"
