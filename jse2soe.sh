@@ -115,7 +115,8 @@ if [ ! -d "stanford_magazine" ]; then
   git clone https://github.com/SU-SWS/stanford_magazine.git
 fi
 cd ${stanfordroot}/stanford_magazine
-git checkout 7.x-1.x
+git fetch --tags
+git checkout tags/7.x-1.0-alpha1
 
 cd ${stanfordroot}/stanford_jumpstart_engineering
 git fetch
@@ -163,9 +164,8 @@ if [ ! -d "${stanfordroot}/stanford_soe_regions" ]; then
   git clone https://github.com/SU-SOE/stanford_soe_regions.git
 fi
 cd ${stanfordroot}/stanford_soe_regions
-git fetch
-git checkout 7.x-1.x
-git pull origin 7.x-1.x
+git fetch --tags
+git checkout tags/7.x-1.0-alpha1
 cd ${stanfordroot}
 
 if [ ! -d "${stanfordroot}/stanford_field_formatters" ]; then
