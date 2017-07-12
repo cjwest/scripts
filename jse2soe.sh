@@ -190,7 +190,7 @@ git pull origin 7.x-2.x-dev
 cd ${stanfordroot}
 
 drush updb -y
-drush rr
+drush cc all
 
 drush fr stanford_image_styles stanford_image -y --force
 drush cc all
