@@ -331,7 +331,7 @@ echo "   - Navigate to admin/structure/types/manage/stanford_magazine_article/fi
 echo "   - Edit the accent color field and set a default color"
 echo "   - Move accent color above the department field"
 echo " - Configure Paragraph types"
-echo "   - Configure Paragraph types"
+echo "   - Two Columns and Textarea Simple"
 echo
 echo "*Stanford Magazine Issue"
 echo " - Configure the Accent Color"
