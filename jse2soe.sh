@@ -129,7 +129,7 @@ if [ ! -d "stanford_soe_helper" ]; then
 fi
 cd ${stanfordroot}/stanford_soe_helper
 git fetch --tags
-git checkout tags/7.x-1.0-alpha1
+git checkout tags/7.x-2.0-alpha1
 cd ${stanfordroot}
 
 if [ ! -d "${stanfordroot}/stanford_paragraph_types" ]; then
