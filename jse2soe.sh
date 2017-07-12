@@ -190,33 +190,25 @@ drush rr
 
 
 drush en chosen views_load_more field_group_link -y
-drush cc all
 drush en nobots -y
-drush cc all
 drush en ds_ui -y
 drush en context_list_active -y
-drush cc all
 drush en stanford_soe_regions stanford_help -y
-drush cc all
 drush en stanford_magazine stanford_magazine_issue_views -y
-drush cc all
 drush en stanford_magazine_issue -y
-drush cc all
 drush en stanford_soe_helper_magazine -y
-drush cc all
 drush en stanford_soe_helper_landing_page -y
-drush cc all
 drush en stanford_soe_helper_page -y
-drush cc all
 drush en stanford_soe_helper_event -y
-drush cc all
-drush en stanford_bean_types_call_to_action stanford_bean_types_call_to_action_administration -y
-drush cc all
+#Not Ready
+#drush en stanford_bean_types_call_to_action stanford_bean_types_call_to_action_administration -y
 drush fr stanford_image_styles stanford_image -y --force
+drush cc all
 drush fr stanford_magazine stanford_magazine_issue -y --force
 drush fr stanford_soe_helper_magazine  -y --force
 drush fr stanford_soe_helper_event stanford_soe_helper_page stanford_soe_helper_landing_page -y --force
 drush fr stanford_bean_types_call_to_action stanford_bean_types_call_to_action_administration -y --force
+drush cc all
 drush cc all
 
 # drush role-add-perm 'user-role' 'permission'
