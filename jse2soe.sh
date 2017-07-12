@@ -128,9 +128,8 @@ if [ ! -d "stanford_soe_helper" ]; then
   git clone https://github.com/SU-SOE/stanford_soe_helper.git
 fi
 cd ${stanfordroot}/stanford_soe_helper
-git fetch
-git checkout redesign
-git pull origin redesign
+git fetch --tags
+git checkout tags/7.x-1.0-alpha1
 cd ${stanfordroot}
 
 if [ ! -d "${stanfordroot}/stanford_paragraph_types" ]; then
