@@ -81,7 +81,7 @@ fi
 
 cd ${contribroot}
 if [ ! -d "views_load_more" ]; then
-  drush dl regions --destination=sites/${location}/modules/contrib
+  drush dl views_load_more --destination=sites/${location}/modules/contrib
 fi
 
 
