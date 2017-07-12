@@ -115,8 +115,9 @@ if [ ! -d "stanford_magazine" ]; then
   git clone https://github.com/SU-SWS/stanford_magazine.git
 fi
 cd ${stanfordroot}/stanford_magazine
-git fetch --tags
-git checkout tags/7.x-1.0-alpha1
+git fetch
+git checkout 7.x-1.x
+git pull origin 7.x-1.x
 
 cd ${stanfordroot}/stanford_jumpstart_engineering
 git fetch
