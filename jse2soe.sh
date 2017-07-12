@@ -37,6 +37,7 @@ else
     cd ${siteroot}
     drush vset stanford_sites_allow_features_generate TRUE
     drush dis webauth webauth_extras -y
+    drush vset stanford_memory_limit 2G
   else
     echo "usage: jse2soe.sh <sitename> <local|sites>";
     exit
