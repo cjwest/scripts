@@ -198,6 +198,7 @@ drush en chosen views_load_more field_group_link -y
 drush en nobots -y
 drush en ds_ui -y
 drush en context_list_active -y
+drush en stanford_paragraph_types_two_columns stanford_paragraph_types_textarea_simple -y
 drush en stanford_soe_regions stanford_help -y
 drush en stanford_magazine_issue -y
 drush en stanford_magazine stanford_magazine_issue_views -y
@@ -254,7 +255,6 @@ echo
 echo "*Configure Taxonomies"
 echo " - admin/structure/taxonomy_manager/voc/soe_accent_color - pink orange turquoise"
 echo " - admin/structure/taxonomy_manager/voc/stanford_magazine_topics"
-echo " - admin/structure/taxonomy_manager/voc/stanford_mag_issue_layout - featured left featured right featured center"
 echo " - admin/structure/taxonomy_manager/voc/stanford_mag_issue_series"
 echo
 echo "*Stanford Help"
@@ -316,7 +316,7 @@ echo
 echo "*Stanford Magazine Article"
 echo " - Configure layout"
 echo "   - Navigate to Stanford Landing Page"
-echo "   - admin/structure/types/manage/stanford-landing-page/display/"
+echo "   - admin/structure/types/manage/stanford-magazine_article/display/"
 echo "   - Enable Full Content"
 echo "   - Navigate to  full content"
 echo "   - Move Date and Byline Wrapper above publishing date and byline"
@@ -330,6 +330,8 @@ echo " - Configure the Accent Color"
 echo "   - Navigate to admin/structure/types/manage/stanford_magazine_article/fields/field_s_mag_article_accent_color"
 echo "   - Edit the accent color field and set a default color"
 echo "   - Move accent color above the department field"
+echo " - Configure Paragraph types"
+echo "   - Configure Paragraph types"
 echo
 echo "*Stanford Magazine Issue"
 echo " - Configure the Accent Color"
