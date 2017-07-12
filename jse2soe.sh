@@ -26,6 +26,7 @@ if [ -z "$hosting" ]; then
 fi
 
 if [ $hosting == 'sites' ]; then
+  echo "*** Sites configuration"
   docroot='/var/www'
   siteroot=${docroot}/ds_${sitename}/public_html
 else
@@ -33,7 +34,7 @@ else
     docroot='/Users/cjwest/Documents/htdocs'
     siteroot=${docroot}/${sitename}
 
-    echo "Local configuration"
+    echo "*** Local configuration"
     cd ${siteroot}
     drush vset stanford_sites_allow_features_generate TRUE
     drush dis webauth webauth_extras -y
@@ -50,8 +51,8 @@ stanfordroot=${siteroot}/sites/${location}/modules/stanford
 contribroot=${siteroot}/sites/${location}/modules/contrib
 libraryroot=${siteroot}/sites/${location}/libraries
 
-echo "Backing up "${sitename}
-drush arb
+#echo "Backing up "${sitename}
+#drush arb
 
 # Install dependencies
 cd ${libraryroot}
