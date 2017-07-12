@@ -91,8 +91,8 @@ if [ ! -d "${stanfordroot}/stanford_image_styles" ]; then
 fi
 cd ${stanfordroot}/stanford_image_styles
 git fetch
-git checkout Redesign
-git pull origin Redesign
+git checkout 7.x-4.x
+git pull origin 7.x-4.x
 
 cd ${stanfordroot}
 if [ ! -d "${stanfordroot}/stanford_image" ]; then
@@ -120,8 +120,8 @@ git checkout tags/7.x-1.0-alpha1
 
 cd ${stanfordroot}/stanford_jumpstart_engineering
 git fetch
-git checkout redesign
-git pull origin redesign
+git checkout 7.x-5.x
+git pull origin 7.x-5.x
 
 cd ${stanfordroot}
 if [ ! -d "stanford_soe_helper" ]; then
@@ -181,8 +181,8 @@ if [ ! -d "${stanfordroot}/stanford_bean_types" ]; then
 fi
 cd ${stanfordroot}/stanford_bean_types
 git fetch
-git checkout redesign-cjw
-git pull origin redesign-cjw
+git checkout 7.x-2.x-dev
+git pull origin 7.x-2.x-dev
 cd ${stanfordroot}
 
 drush updb -y
