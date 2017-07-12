@@ -26,7 +26,7 @@ if [ -z "$hosting" ]; then
 fi
 
 if [ $hosting == 'sites' ]; then
-  echo "*** Sites configuration"
+  echo "*** Sites configuration ***"
   docroot='/var/www'
   siteroot=${docroot}/ds_${sitename}/public_html
 else
@@ -34,7 +34,7 @@ else
     docroot='/Users/cjwest/Documents/htdocs'
     siteroot=${docroot}/${sitename}
 
-    echo "*** Local configuration"
+    echo "*** Local configuration ***"
     cd ${siteroot}
     drush vset stanford_sites_allow_features_generate TRUE
     drush dis webauth webauth_extras -y
@@ -131,8 +131,9 @@ if [ ! -d "stanford_soe_helper" ]; then
   git clone https://github.com/SU-SOE/stanford_soe_helper.git
 fi
 cd ${stanfordroot}/stanford_soe_helper
-git fetch --tags
-git checkout tags/7.x-2.0-alpha1
+git fetch
+git checkout 7.x-2.x
+git pull origin 7.x-2.x
 cd ${stanfordroot}
 
 if [ ! -d "${stanfordroot}/stanford_paragraph_types" ]; then
