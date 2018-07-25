@@ -370,3 +370,6 @@ echo " - Default image FT"
 echo ""
 echo "*Stanford Bean Types Call to Action"
 echo "Replace color taxonomy with the SoE Accent Color"
+echo
+echo "*Service Links*"
+echo " - configure as on style"
