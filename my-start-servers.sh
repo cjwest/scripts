@@ -2,5 +2,5 @@
 
 mysql.server start
 php-fpm
-httpd restart
+apachectl start
 
